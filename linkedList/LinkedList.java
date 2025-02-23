@@ -47,6 +47,33 @@ public class LinkedList {
         tail = newNode;
     }
 
+    public void addMiddle(int data, int idx){
+        //step1 : if idx is 0 then addFirst
+        if(idx == 0){
+            addFirst(data);
+            return;
+        }
+
+        Node temp = head;
+        int i = 0;
+        idx = idx - 1;
+
+        //step2 : Traverse the list till idx
+        while(i < idx){
+            temp = temp.next;
+            i++;
+        }
+
+        //step3 : Create a Node
+        Node newNode = new Node(data);
+
+        //step4 : newNode next = temp next
+        newNode.next = temp.next;
+
+        //step5 : temp next = newNode
+        temp.next = newNode;        
+    }
+
     public void display(){
         //step1 : Create a temp Node and assign head to it
         Node temp = head;
