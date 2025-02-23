@@ -47,11 +47,32 @@ public class LinkedList {
         tail = newNode;
     }
 
+    public void display(){
+        //step1 : Create a temp Node and assign head to it
+        Node temp = head;
+
+        //step2 : if there is no data then print List is Empty
+        if(head == null){
+            System.out.print("List is Empty");
+            return;
+        }
+
+        //step3 : Traverse the list and print the data
+        while(temp != null){
+            System.out.print(temp.data + "->");
+            temp = temp.next;
+        }
+
+        System.out.println();
+    }
+
     public static void main(String args[]) {
         LinkedList ll = new LinkedList();
-        ll.addFirst(10);
-        ll.addFirst(20);
-        ll.addLast(30);
-        ll.addLast(40);
+        // ll.addFirst(20);
+        // ll.addFirst(10);
+        // ll.addLast(30);
+        // ll.addLast(40);
+
+        ll.display();
     }
 }
