@@ -77,6 +77,26 @@ public class LinkedList {
         temp.next = newNode;        
     }
 
+    public void removeFirst(){
+
+        //step1 : if head is null then print List is Empty
+        if(head == null){
+            System.out.println("List is Empty");
+            return;
+        }
+
+        //step2 : if head = tail then head = tail = null
+        if(head == tail){
+            head = tail = null;
+            size = 0;
+            return;
+        }
+
+        //step3 : head = head next
+        head = head.next;
+        size--;
+    }
+
 
     public int reverseDisplay(Node head){
         if(head == tail){
@@ -115,6 +135,10 @@ public class LinkedList {
         ll.addLast(30);
         ll.addLast(40);
 
-        ll.reverseDisplay(head);
+        ll.removeFirst();
+
+        ll.display();
+
+        // ll.reverseDisplay(head);
     }
 }
