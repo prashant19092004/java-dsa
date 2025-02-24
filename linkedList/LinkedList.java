@@ -12,10 +12,12 @@ public class LinkedList {
 
     public static Node head;
     public static Node tail;
+    public static int size;
 
     public void addFirst(int data) {
         // step1 : Crate a Node
         Node newNode = new Node(data);
+        size++;
 
         // step2 : if head is null then head = tail = newNode
         if (head == null) {
@@ -33,6 +35,7 @@ public class LinkedList {
     public void addLast(int data){
         //step1 : Create a Node
         Node newNode = new Node(data);
+        size++;
 
         //step2 : if head is null then head = tail = newNode
         if(head == null){
@@ -74,6 +77,18 @@ public class LinkedList {
         temp.next = newNode;        
     }
 
+
+    public int reverseDisplay(Node head){
+        if(head == tail){
+            System.out.print(head.data + " ");
+            return 1;
+        }
+        
+        int fn = reverseDisplay(head.next);
+        System.out.print(head.data + " ");
+        return fn;
+    }
+
     public void display(){
         //step1 : Create a temp Node and assign head to it
         Node temp = head;
@@ -95,11 +110,11 @@ public class LinkedList {
 
     public static void main(String args[]) {
         LinkedList ll = new LinkedList();
-        // ll.addFirst(20);
-        // ll.addFirst(10);
-        // ll.addLast(30);
-        // ll.addLast(40);
+        ll.addFirst(20);
+        ll.addFirst(10);
+        ll.addLast(30);
+        ll.addLast(40);
 
-        ll.display();
+        ll.reverseDisplay(head);
     }
 }
