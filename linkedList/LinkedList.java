@@ -97,6 +97,34 @@ public class LinkedList {
         size--;
     }
 
+    public void removeLast(){
+
+        //step1 : Create a temp Node and assign head to it
+        Node temp = head;
+
+        //step2 : if head is null then print List is Empty
+        if(head == null){
+            System.out.println("List is Empty");
+            return;
+        }
+        //step3 : if head = tail then head = tail = null
+        else if(head == tail){
+            head = tail = null;
+            size = 0;
+            return;
+        }
+
+        //step4 : Traverse the list till second last Node
+        while(temp.next != tail){
+            temp = temp.next;
+        }
+
+        //step5 : tail = temp
+        tail = temp;
+        tail.next = null;
+        size--;
+    }
+
 
     public int reverseDisplay(Node head){
         if(head == tail){
@@ -136,6 +164,7 @@ public class LinkedList {
         ll.addLast(40);
 
         ll.removeFirst();
+        ll.removeLast();
 
         ll.display();
 
