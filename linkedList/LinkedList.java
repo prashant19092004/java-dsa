@@ -125,7 +125,6 @@ public class LinkedList {
         size--;
     }
 
-
     public int reverseDisplay(Node head){
         if(head == tail){
             System.out.print(head.data + " ");
@@ -154,6 +153,19 @@ public class LinkedList {
         }
 
         System.out.println();
+    }
+
+    public int itrSearch(int data){
+        Node temp = head;
+        int i = 0;
+        while(temp != null){
+            if(head.data == data){
+                return i;
+            }
+            temp = temp.next;
+            i++;
+        }
+        return -1;
     }
 
     public static void main(String args[]) {
