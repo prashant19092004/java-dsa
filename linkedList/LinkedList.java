@@ -168,6 +168,41 @@ public class LinkedList {
         return -1;
     }
 
+    public int helper(Node head, int data){
+        if(head == null){
+            return -1;
+        }
+
+        if(head.data == data){
+            return 0;
+        }
+
+        int idx = helper(head.next, data);
+
+        if(idx == -1){
+            return -1;
+        }
+
+        return idx+1;
+    }
+
+    public int recursionSearch(int data){
+        return helper(head, data);
+    }
+
+    public void itrReverse(){
+        Node prev = null;
+        Node curr = tail = head;
+        Node next = null;
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+    }
+
     public static void main(String args[]) {
         LinkedList ll = new LinkedList();
         ll.addFirst(20);
@@ -175,11 +210,11 @@ public class LinkedList {
         ll.addLast(30);
         ll.addLast(40);
 
-        ll.removeFirst();
-        ll.removeLast();
+        // System.out.print(ll.recursionSearch(30));
 
         ll.display();
-
+        ll.itrReverse();
+        ll.display();
         // ll.reverseDisplay(head);
     }
 }

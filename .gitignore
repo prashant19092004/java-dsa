@@ -1,0 +1,17 @@
+# Ignore class files
+*.class
+
+# Ignore compiled Java files in bin and out directories (commonly used in Eclipse and IntelliJ)
+bin/
+out/
+
+# Ignore IDE-specific files and folders
+*.log
+*.iml
+.idea/
+.vscode/
+target/
+build/
+
+# Ignore dependency directories
+node_modules/
