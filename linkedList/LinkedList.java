@@ -203,17 +203,68 @@ public class LinkedList {
         head = prev;
     }
 
+    public void deleteNthFromEnd(int n){
+
+        if(head == null){
+            System.out.print("List is Empty");
+            return;
+        }
+        Node prev = head;
+        Node curr = null;
+
+        System.out.println((size-n));
+        for(int i=0; i<((size-n)-1); i++){
+            prev = prev.next;
+        }
+
+        curr = prev.next;
+        prev.next = curr.next;
+    }
+
+    public Node findMid(Node head){
+        Node slow = head;
+        Node fast = head;
+
+        while(fast != null || fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        System.out.println(slow.data);
+
+        return slow;
+    }
+
+    // public boolean isPalindrome(){
+    //     Node slow = head;
+    //     Node fast = head;
+
+    //     while(fast != null && fast.next != null){
+    //         slow = slow.next;
+    //         fast = fast.next.next;
+    //     }
+
+    //     System.out.println(slow.data);
+    //     // System.out.println(fast.data);
+
+
+    //     return true;
+    // }
+
     public static void main(String args[]) {
         LinkedList ll = new LinkedList();
         ll.addFirst(20);
         ll.addFirst(10);
         ll.addLast(30);
         ll.addLast(40);
+        ll.addLast(50);
 
         // System.out.print(ll.recursionSearch(30));
 
-        ll.display();
-        ll.itrReverse();
+        // ll.deleteNthFromEnd(2);
+        // ll.isPalindrome();
+        // ll.display();
+        // ll.itrReverse();
         ll.display();
         // ll.reverseDisplay(head);
     }
