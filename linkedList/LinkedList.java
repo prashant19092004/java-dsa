@@ -225,7 +225,7 @@ public class LinkedList {
         Node slow = head;
         Node fast = head;
 
-        while(fast != null || fast.next != null){
+        while(fast != null && fast.next != null){
             slow = slow.next;
             fast = fast.next.next;
         }
@@ -235,37 +235,56 @@ public class LinkedList {
         return slow;
     }
 
-    // public boolean isPalindrome(){
-    //     Node slow = head;
-    //     Node fast = head;
+    public boolean isPalindrome(){
+        if(head == null ||head.next == null){
+            return true;
+        }
 
-    //     while(fast != null && fast.next != null){
-    //         slow = slow.next;
-    //         fast = fast.next.next;
-    //     }
+        Node midNode = findMid(head);
 
-    //     System.out.println(slow.data);
-    //     // System.out.println(fast.data);
+        Node curr = midNode;
+        Node prev = null;
+        Node next = null;
 
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
 
-    //     return true;
-    // }
+        Node right = prev;
+        Node left = head;
+
+        while(right != null){
+            if(right.data != left.data){
+                return false;
+            }
+
+            left = left.next;
+            right = right.next;
+        }
+
+        return true;
+    }
 
     public static void main(String args[]) {
         LinkedList ll = new LinkedList();
         ll.addFirst(20);
         ll.addFirst(10);
         ll.addLast(30);
-        ll.addLast(40);
-        ll.addLast(50);
+        ll.addLast(20);
+        ll.addLast(10);
 
         // System.out.print(ll.recursionSearch(30));
 
         // ll.deleteNthFromEnd(2);
-        // ll.isPalindrome();
+        
         // ll.display();
         // ll.itrReverse();
         ll.display();
+        boolean res = ll.isPalindrome();
+        System.out.println(res);
         // ll.reverseDisplay(head);
     }
 }
