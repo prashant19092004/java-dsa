@@ -268,13 +268,80 @@ public class LinkedList {
         return true;
     }
 
+    public boolean isCycle(Node head){
+        Node slow = head;
+        Node fast = head;
+
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(fast == slow){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public Node findMid2(Node head){
+        Node slow = head;
+        Node fast = head.next;
+
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+    public Node merge(Node left, Node right){
+        Node dummy = new Node(-1);
+        Node prev = dummy;
+
+        Node c1 = left;
+        Node c2 = right;
+
+        while(c1 != null && c2 != null){
+            if(c1.data < c2.data){
+                prev.next = c1;
+                c1 = c1.next;
+            }else{
+                prev.next = c2;
+                c2 = c2.next;
+            }
+            prev = prev.next;
+        }
+
+        prev.next = c1 != null ? c1 : c2;
+
+        return dummy.next;
+    }
+
+    public Node mergeSort(Node head){
+        if(head == null || head.next == null){
+            return head;
+        }
+
+        Node mid = findMid2(head);
+
+        Node left = head;
+        Node right = mid.next;
+        mid.next = null;
+
+        Node newLeft = mergeSort(left);
+        Node newRight = mergeSort(right);
+
+        return merge(newLeft, newRight);
+    }
+
     public static void main(String args[]) {
         LinkedList ll = new LinkedList();
-        ll.addFirst(20);
-        ll.addFirst(10);
-        ll.addLast(30);
-        ll.addLast(20);
-        ll.addLast(10);
+        ll.addFirst(1);
+        ll.addFirst(2);
+        ll.addFirst(3);
+        ll.addFirst(4);
+        ll.addFirst(5);
 
         // System.out.print(ll.recursionSearch(30));
 
@@ -283,8 +350,8 @@ public class LinkedList {
         // ll.display();
         // ll.itrReverse();
         ll.display();
-        boolean res = ll.isPalindrome();
-        System.out.println(res);
+        ll.head = ll.mergeSort(head);
+        ll.display();
         // ll.reverseDisplay(head);
     }
 }
