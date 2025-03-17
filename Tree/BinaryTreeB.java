@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class BinaryTreeB{
 
@@ -43,6 +45,11 @@ public class BinaryTreeB{
         public void preorderByIteration(Node root){
             Stack<Node> stack = new Stack<Node>();
 
+            if(root == null){
+                System.out.print("Tree is Empty");
+                return;
+            }
+
             Node ptr = root;
 
             while(ptr != null){
@@ -71,6 +78,19 @@ public class BinaryTreeB{
             inorderByRecursion(root.right);
         }
 
+        // public void inorderByIteration(Node root){
+        //     if(root == null){
+        //         System.out.print("Tree is Empty");
+        //         return;
+        //     }
+
+        //     Node ptr = root;
+
+        //     while(ptr != null){
+
+        //     }
+        // }
+
         public void postorderByRecursion(Node root){
 
             if(root == null){
@@ -80,6 +100,39 @@ public class BinaryTreeB{
             postorderByRecursion(root.left);
             postorderByRecursion(root.right);
             System.out.print(root.data + " ");
+        }
+
+        public void displayUsingBFS(Node root){
+            if(root == null){
+                System.out.print("Tree is Empty");
+                return;
+            }
+
+            Queue<Node> q = new LinkedList<>();
+            q.add(root);
+            q.add(null);
+
+            while (!q.isEmpty()) {
+                Node currNode = q.remove();
+
+                if(currNode == null){
+                    System.out.println();
+                    if(q.isEmpty()){
+                        break;
+                    }else{
+                        q.add(null);
+                    }
+                }else{
+                    System.out.print(currNode.data + " ");
+                    if(currNode.left != null){
+                        q.add(currNode.left);
+                    }
+
+                    if(currNode.right != null){
+                        q.add(currNode.right);
+                    }
+                }
+            }
         }
     }
     public static void main(String args[]){
@@ -95,5 +148,7 @@ public class BinaryTreeB{
         tree.inorderByRecursion(root);
         System.out.println();
         tree.postorderByRecursion(root);
+        System.out.println();
+        tree.displayUsingBFS(root);
     }
 }
