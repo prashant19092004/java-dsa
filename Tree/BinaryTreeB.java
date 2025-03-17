@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class BinaryTreeB{
 
     static class Node{
@@ -29,34 +31,54 @@ public class BinaryTreeB{
             return newNode;
         }
 
-        public void preorder(Node root){
+        public void preorderByRecursion(Node root){
             if(root == null){
                 return;
             }
             System.out.print(root.data + " ");
-            preorder(root.left);
-            preorder(root.right);
+            preorderByRecursion(root.left);
+            preorderByRecursion(root.right);
         }
 
-        public void inorder(Node root){
+        public void preorderByIteration(Node root){
+            Stack<Node> stack = new Stack<Node>();
+
+            Node ptr = root;
+
+            while(ptr != null){
+                System.out.print(ptr.data + " ");
+
+                if(ptr.right != null){
+                    stack.push(ptr.right);
+                }
+
+                if(ptr.left != null){
+                    ptr = ptr.left;
+                }else{
+                    ptr = stack.isEmpty() ? null : stack.pop();
+                }
+            }
+        }
+
+        public void inorderByRecursion(Node root){
 
             if(root == null){
                 return;
             }
 
-            inorder(root.left);
+            inorderByRecursion(root.left);
             System.out.print(root.data + " ");
-            inorder(root.right);
+            inorderByRecursion(root.right);
         }
 
-        public void postorder(Node root){
+        public void postorderByRecursion(Node root){
 
             if(root == null){
                 return;
             }
 
-            postorder(root.left);
-            postorder(root.right);
+            postorderByRecursion(root.left);
+            postorderByRecursion(root.right);
             System.out.print(root.data + " ");
         }
     }
@@ -66,6 +88,12 @@ public class BinaryTreeB{
         BinaryTree tree = new BinaryTree();
 
         Node root = tree.buildTree(nodes);
-        tree.inorder(root);
+        tree.preorderByRecursion(root);
+        System.out.println();
+        tree.preorderByIteration(root);
+        System.out.println();
+        tree.inorderByRecursion(root);
+        System.out.println();
+        tree.postorderByRecursion(root);
     }
 }
