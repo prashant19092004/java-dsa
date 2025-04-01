@@ -104,19 +104,20 @@ public class BinaryTreeB{
 
         public void displayUsingBFS(Node root){
             if(root == null){
-                System.out.print("Tree is Empty");
                 return;
             }
 
             Queue<Node> q = new LinkedList<>();
+
             q.add(root);
             q.add(null);
 
-            while (!q.isEmpty()) {
+            while(!q.isEmpty()){
                 Node currNode = q.remove();
 
                 if(currNode == null){
                     System.out.println();
+
                     if(q.isEmpty()){
                         break;
                     }else{
@@ -127,13 +128,26 @@ public class BinaryTreeB{
                     if(currNode.left != null){
                         q.add(currNode.left);
                     }
-
                     if(currNode.right != null){
                         q.add(currNode.right);
                     }
                 }
             }
         }
+
+        public int height(Node root){
+
+            if(root == null){
+                return 0;
+            }
+
+            int lh = height(root.left);
+            int rh = height(root.right);
+
+            int tempHeight = Math.max(lh, rh) + 1;
+
+            return tempHeight;
+        } 
     }
     public static void main(String args[]){
         int nodes[] = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
@@ -141,14 +155,16 @@ public class BinaryTreeB{
         BinaryTree tree = new BinaryTree();
 
         Node root = tree.buildTree(nodes);
-        tree.preorderByRecursion(root);
-        System.out.println();
-        tree.preorderByIteration(root);
-        System.out.println();
-        tree.inorderByRecursion(root);
-        System.out.println();
-        tree.postorderByRecursion(root);
-        System.out.println();
-        tree.displayUsingBFS(root);
+        // tree.preorderByRecursion(root);
+        // System.out.println();
+        // tree.preorderByIteration(root);
+        // System.out.println();
+        // tree.inorderByRecursion(root);
+        // System.out.println();
+        // tree.postorderByRecursion(root);
+        // System.out.println();
+        // tree.displayUsingBFS(root);
+        // System.out.println();
+        System.out.print(tree.height(root));
     }
 }
